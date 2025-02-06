@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: white;
+            padding: 20px;
+        }
+
+        /* Background Video */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 2px solid #2A9D8F;
+            font-size: 16px;
+            outline: none;
+            text-align: center;
+        }
+
+        button {
+            background-color: #2A9D8F;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #84cae6;
+            transform: scale(1.05);
+        }
+
+        .loader {
+            display: none;
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #2A9D8F;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 12px;
+            display: none;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Video -->
+    <video class="video-background" autoplay muted loop>
+        <source src="https://github.com/DHILIP-S-E/videos/raw/main/videos/187225-879649787.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <h1>AI Image Generator</h1>
+
+    <div class="container">
+        <input type="text" id="prompt" placeholder="Enter image description..." />
+        <button onclick="generateImage()">Generate</button>
+        <div class="loader" id="loader"></div>
+        <br>
+        <img id="generated-image" src="" alt="Generated Image">
+    </div>
+
+    <footer>&copy; 2025 AI Image Generator. All rights reserved.</footer>
+
+    <script>
+        async function generateImage() {
+            const prompt = document.getElementById('prompt').value;
+            if (!prompt) {
+                alert("Please enter a description!");
+                return;
+            }
+
+            const apiKey = "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";  // Replace with your actual API key
+            const apiUrl = "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-3.5-large";
+
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("generated-image").style.display = "none";
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${apiKey}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ inputs: prompt })
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to generate image. Try again later.");
+                }
+
+                const blob = await response.blob();
+                const imageUrl = URL.createObjectURL(blob);
+
+                document.getElementById("generated-image").src = imageUrl;
+                document.getElementById("generated-image").style.display = "block";
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                document.getElementById("loader").style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
