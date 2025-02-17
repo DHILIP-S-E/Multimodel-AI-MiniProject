@@ -1,11 +1,22 @@
 /* General Styles */
-body {
-    font-family: 'Inter', sans-serif;
+* {
     margin: 0;
-    background-color: #f4f6f9;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
     display: flex;
     height: 100vh;
+    transition: background 0.5s ease, color 0.5s ease;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #121212, #1e1e1e);
+    color: #fff;
 }
 
 .container {
@@ -16,13 +27,14 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 250px;
-    background: #1e3a8a;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     padding: 1.5rem 1rem;
     height: 100vh;
+    transition: width 0.3s ease;
 }
 
 .sidebar h2 {
@@ -30,6 +42,7 @@ body {
     font-weight: 600;
     margin-bottom: 1.5rem;
     text-align: center;
+    letter-spacing: 1px;
 }
 
 .sidebar nav ul {
@@ -51,16 +64,33 @@ body {
     border-radius: 6px;
     display: flex;
     align-items: center;
+    gap: 10px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .sidebar nav ul li a:hover {
-    background: #2563eb;
-    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffdd57;
 }
 
 .sidebar nav ul li a.active {
-    background: #3b82f6;
+    background: rgba(255, 255, 255, 0.3);
+    color: #ffdd57;
+}
+
+.theme-btn {
+    margin-top: auto;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.theme-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 /* Main Content */
@@ -69,6 +99,7 @@ body {
     padding: 2rem;
     overflow-y: auto;
     position: relative;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 /* Homepage Styles */
@@ -77,10 +108,11 @@ body {
 }
 
 .homepage h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
     color: #1e3a8a;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .homepage p {
@@ -91,11 +123,11 @@ body {
 
 /* Card Layout */
 .model-showcase {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
     justify-content: center;
     align-items: stretch;
-    gap: 1.5rem;
     max-width: 1200px;
     margin: auto;
 }
@@ -104,9 +136,7 @@ body {
 .card {
     background: white;
     border: none;
-    border-radius: 12px;
-    width: 300px;
-    height: 220px;
+    border-radius: 15px;
     padding: 1.5rem;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -116,16 +146,16 @@ body {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-/* Hover Effect */
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* Card Content */
 .card h2 {
     font-size: 1.4rem;
     color: #1e3a8a;
+    margin-bottom: 1rem;
 }
 
 .card p {
@@ -136,31 +166,29 @@ body {
 
 /* Button */
 .card button {
-    background-color: #1e3a8a;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
     color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.7rem 1.5rem;
     font-size: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .card button:hover {
-    background-color: #2563eb;
+    background: linear-gradient(135deg, #a777e3, #6e8efb);
 }
 
 /* Fade-in Animation */
-.main-content {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -171,7 +199,11 @@ body {
     }
 
     .sidebar h2 {
-        font-size: 1rem;
+        display: none;
+    }
+
+    .sidebar nav ul li a {
+        justify-content: center;
     }
 
     .main-content {
@@ -179,12 +211,6 @@ body {
     }
 
     .model-showcase {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-        width: 90%;
-        height: auto;
+        grid-template-columns: 1fr;
     }
 }
