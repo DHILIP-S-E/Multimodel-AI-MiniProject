@@ -3,67 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimodal AI</title>
-    <link rel="stylesheet" href="style.css">
+    <title>AI Card UI with Animation</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h2>Multimodal AI</h2>
-            <nav>
-                <ul>
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#text-model">Text Model</a></li>
-                    <li><a href="#image-model">Image Model</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <section id="home" class="fade-in">
-                <h1>Welcome to Multimodal AI</h1>
-                <p>Choose a model to get started:</p>
-                <div class="model-showcase">
-                    <div class="card" id="text-model">
-                        <h2>Text Model</h2>
-                        <p>Generate and analyze text using AI.</p>
-                        <button onclick="location.href='#text-model-section'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Image Model</h2>
-                        <p>Classify and understand images with AI.</p>
-                        <button onclick="location.href='image1.html'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Image Model</h2>
-                        <p>Classify and understand images with AI.</p>
-                        <button onclick="location.href='image2.html'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Image Model</h2>
-                        <p>Classify and understand images with AI.</p>
-                        <button onclick="location.href='image3.html'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Image Model</h2>
-                        <p>Classify and understand images with AI.</p>
-                        <button onclick="location.href='image4.html'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Summarise Model</h2>
-                        <p>Summarise The Conteent.</p>
-                        <button onclick="location.href='summarise.html'">Open Model</button>
-                    </div>
-                    <div class="card" id="image-model">
-                        <h2>Audio Music</h2>
-                        <p>Classify and understand images with AI.</p>
-                        <button onclick="location.href='audiomusic.html'">Open Model</button>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <div class="background-animation"></div>
+    
+    <h1 class="animated-text"><span>🌍 AI is </span><span id="changing-text"></span> 🚀</h1>
+    
+    <div class="card-container">
+        <div class="ai-card">
+            <div class="card-icon">💻</div>
+            <h3>NLP CHATBOT</h3>
+            <p>Description for AI Model 1.</p>
+            <a href="https://nlp-chatbot-6fyjyyghb6hhjrbdzemkrh.streamlit.app/" class="btn">Explore Model 1</a>
+        </div>
+        
+        <div class="ai-card">
+            <div class="card-icon">🤖</div>
+            <h3>IMAGE GENRATION Model -1</h3>
+            <p>Description for AI Model 2.</p>
+            <a href="image1.html" class="btn">Explore Model 2</a>
+        </div>
+        
+        <div class="ai-card">
+            <div class="card-icon">🧠</div>
+            <h3>IMAGE GENRATION Model -2</h3>
+            <p>Description for AI Model 3.</p>
+            <a href="image2.html" class="btn">Explore Model 3</a>
+        </div>
+        
+        <div class="ai-card">
+            <div class="card-icon">🔬</div>
+            <h3>IMAGE GENRATION Model -3</h3>
+            <p>Description for AI Model 4.</p>
+            <a href="image3.html" class="btn">Explore Model 4</a>
+        </div>
+        <div class="ai-card">
+            <div class="card-icon">🔬</div>
+            <h3>SUMMARISER</h3>
+            <p>Description for AI Model 4.</p>
+            <a href="summarise.html" class="btn">Explore Model 4</a>
+        </div>
     </div>
+    
+    <script>
+        const phrases = ["Changing the World!", "powerful!", "the future!", "transforming industries!"];
+        let index = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeEffect() {
+            const textElement = document.getElementById("changing-text");
+            const currentPhrase = phrases[index];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex--);
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex++);
+            }
+            
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                setTimeout(() => isDeleting = true, 1000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                index = (index + 1) % phrases.length;
+            }
+            setTimeout(typeEffect, isDeleting ? 100 : 150);
+        }
+        
+        typeEffect();
+    </script>
 </body>
 </html>
