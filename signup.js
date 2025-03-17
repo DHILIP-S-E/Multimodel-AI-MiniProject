@@ -4,7 +4,7 @@ document.getElementById("signup-form").addEventListener("submit", async function
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
 
-    const response = await fetch("https://multimodelhub-backend.onrender.com/signup", {
+    const response = await fetch("http://localhost:5000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
