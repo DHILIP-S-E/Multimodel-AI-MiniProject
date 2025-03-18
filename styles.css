@@ -90,22 +90,27 @@ body {
 }
 
 /* Button Ripple Effect */
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.6s;
+.btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #4a90e2, #2ecc71);
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
 }
 
-.btn:hover::after {
-    transform: translate(-50%, -50%) scale(1);
+/* Smoother Hover Effect */
+.btn:hover {
+    background: linear-gradient(45deg, #2ecc71, #4a90e2);
+    transform: scale(1.05); /* Slight scaling instead of jumping */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
