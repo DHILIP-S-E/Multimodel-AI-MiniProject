@@ -9,7 +9,8 @@
     <body>
 
         <header>
-            <h1>🚀 Explore AI Models</h1>
+            <h1> Explore AI Models</h1>
+            <h1 class="animated-text"><span> AI is </span><span id="changing-text"></span> </h1>
             <p>Discover powerful AI models for text, images, and more.</p>
         </header>
 
@@ -54,6 +55,34 @@
                 <p>Quickly summarize long text data.</p>
                 <a href="summarise.html" class="btn">Use Model</a>
             </div>
+             
+     <script>
+        const phrases = ["Changing the World!", "powerful!", "the future!", "transforming industries!"];
+        let index = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeEffect() {
+            const textElement = document.getElementById("changing-text");
+            const currentPhrase = phrases[index];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex--);
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex++);
+            }
+            
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                setTimeout(() => isDeleting = true, 1000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                index = (index + 1) % phrases.length;
+            }
+            setTimeout(typeEffect, isDeleting ? 100 : 150);
+        }
+        
+        typeEffect();
+    </script>
         </main>
 
     </body>
