@@ -12,6 +12,7 @@
             <h1> Explore AI Models</h1>
             <h1 class="animated-text"><span> AI is </span><span id="changing-text"></span> </h1>
             <p>Discover powerful AI models for text, images, and more.</p>
+            <button id="logout-btn" href="lo" class="btn">Logout</button>
         </header>
 
         <main class="card-container">
@@ -82,6 +83,14 @@
         }
         
         typeEffect();
+        document.getElementById("logout-btn").addEventListener("click", function() {
+        // Clear session storage and local storage
+        sessionStorage.clear();
+        localStorage.clear();
+        
+        // Redirect to the login page
+        window.location.href = "login.html"; // Ensure "login.html" exists in the same directory
+    });
     </script>
         </main>
 
