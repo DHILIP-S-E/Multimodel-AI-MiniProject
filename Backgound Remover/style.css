@@ -77,6 +77,7 @@ body{
 }
 .image1{
     width: 300px;
+    background-image: url("withoutbg.png");
     animation: remove 15s linear infinite;
     overflow: hidden;
     border-radius: 10px;
